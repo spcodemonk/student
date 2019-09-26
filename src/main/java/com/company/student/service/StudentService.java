@@ -9,22 +9,13 @@ import org.springframework.stereotype.Service;
 import com.company.student.dao.StudentRepository;
 import com.company.student.model.Student;
 
-@Service
-public class StudentService {
 
-	@Autowired
-	StudentRepository studentRepository;
-	
-	public List<Student> getStudentsList() {
+public interface StudentService {
 
-		List<Student> students = new ArrayList<>();
-		
-		Student st = studentRepository.findById(001).get();
-		
-		
-		students.add(st);
-		
-		return students;
-	}
+	public List<Student> getStudentsList();
+
+	public Student createStudent(Student student);
+
+	public List<Student> getStudent(int id);
 
 }
