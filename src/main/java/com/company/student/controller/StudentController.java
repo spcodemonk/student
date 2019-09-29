@@ -47,5 +47,13 @@ public class StudentController {
 		
 		return list;
 	}
+	
+	@GetMapping("/findbyCat")
+	public List<Student> getStudentsByCategory(@RequestParam("cat") String category){
+		
+		List<Student> list = studentService.getStudentsByCategory(category);
+
+		return list;
+	}
 		
 }

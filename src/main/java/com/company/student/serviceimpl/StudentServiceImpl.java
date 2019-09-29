@@ -1,4 +1,6 @@
-package com.company.student.service;
+package com.company.student.serviceimpl;
+
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +10,10 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.company.student.dao.StudentRepository;
 import com.company.student.model.Student;
+import com.company.student.repository.StudentRepository;
+import com.company.student.service.StudentService;
+
 
 @Service
 public class StudentServiceImpl implements StudentService{
@@ -42,6 +46,17 @@ public class StudentServiceImpl implements StudentService{
 		
 		Student student = studentRepository.findById(id).get();
 		students.add(student);
+		return students;
+	}
+
+	@Override
+	public List<Student> getStudentsByCategory(String category) {
+		List<Student> students = new ArrayList<>();
+		
+//		 students = studentRepository.findByCategory(category);
+		
+		students = studentRepository.findByCategorySortedDesc(category);
+		
 		return students;
 	}
 	
