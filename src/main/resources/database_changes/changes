@@ -1,0 +1,45 @@
+
+CREATE TABLE `address` (
+  `id` varchar(100) NOT NULL,
+  `city` varchar(50) DEFAULT NULL,
+  `line1` varchar(100) DEFAULT NULL,
+  `pincode` int(11) DEFAULT NULL,
+  `sid` int(11) DEFAULT NULL,
+  `line` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `sid` (`sid`),
+  CONSTRAINT `address_ibfk_1` FOREIGN KEY (`sid`) REFERENCES `student_info` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `courses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `course_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `project` (
+  `pid` varchar(50) NOT NULL,
+  `pname` varchar(100) DEFAULT NULL,
+  `cdate` date DEFAULT NULL,
+  PRIMARY KEY (`pid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `student_info` (
+  `id` int(11) NOT NULL,
+  `name` varchar(250) DEFAULT NULL,
+  `category` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+CREATE TABLE `student_project_relation` (
+  `id` varchar(20) NOT NULL,
+  `sid` int(11) NOT NULL,
+  `pid` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `sid` (`sid`),
+  KEY `pid` (`pid`),
+  CONSTRAINT `student_project_relation_ibfk_1` FOREIGN KEY (`sid`) REFERENCES `student_info` (`id`),
+  CONSTRAINT `student_project_relation_ibfk_2` FOREIGN KEY (`pid`) REFERENCES `project` (`pid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+

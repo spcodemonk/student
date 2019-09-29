@@ -2,11 +2,14 @@ package com.company.student.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -14,18 +17,21 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="project")
+@Table(name = "project")
 public class Project implements Serializable {
 
 	@Id
-	@GeneratedValue(generator="UUID")
-	@GenericGenerator(name = "UUID",strategy = "org.hibernate.id.UUIDGenerator")
-	@Column(name="pid")
+	@GeneratedValue(generator = "UUID")
+	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+	@Column(name = "pid")
 	private String pid;
-	
+
 	private String pname;
-	
+
 	private LocalDate cdate;
+
+	@ManyToMany(mappedBy = "projects")
+	private Set<Student> students = new HashSet<>();;
 
 	public String getPname() {
 		return pname;
@@ -46,6 +52,5 @@ public class Project implements Serializable {
 	public String getPid() {
 		return pid;
 	}
-	
-	
+
 }
