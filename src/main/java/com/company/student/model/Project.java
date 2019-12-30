@@ -16,18 +16,25 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name = "project")
+@ApiModel(description = "project details ")
 public class Project implements Serializable {
 
 	@Id
 	@GeneratedValue(generator = "UUID")
 	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
 	@Column(name = "pid")
+    @ApiModelProperty(notes = "The database generated project ID")
 	private String pid;
 
+	@ApiModelProperty(notes="The project name")
 	private String pname;
-
+	
+	@ApiModelProperty(notes="completion date")
 	private LocalDate cdate;
 
 	@ManyToMany(mappedBy = "projects")
